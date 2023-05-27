@@ -5,7 +5,7 @@ export interface MarkDocument extends mongoose.Document {
     studendId?: any;
     name?: string;
     studentRollNo?: string;
-    // studentClass?: string;
+    studentClass?: string;
     term?: string;
     tamil?: Number;
     english?: Number;

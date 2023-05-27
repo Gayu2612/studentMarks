@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { saveStudentMarks } from 'src/controller/marks.controller';
+import { saveStudentMarks } from '../controller/marks.controller';
 
 const router: Router = Router();
 

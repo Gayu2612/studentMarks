@@ -1,9 +1,8 @@
 import { validationResult } from "express-validator"
 import * as async from 'async';
-import { StudentDocument, Student} from '../models/student.model'
 import { response } from "../helper/commonResponseHandler";
 import { clientError, errorMessage } from "../helper/ErrorMessage";
-import { Mark, MarkDocument } from "src/models/mark.model";
+import { Mark, MarkDocument } from "../models/mark.model";
 
 var activity = 'StudentMarks';
 
