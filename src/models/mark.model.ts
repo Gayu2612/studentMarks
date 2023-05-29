@@ -12,7 +12,7 @@ export interface MarkDocument extends mongoose.Document {
     maths?: Number;
     science?: Number;
     computer?: Number;
-    subject?:any;
+    subjects?:any[];
     status?: Number;
     isDeleted?: boolean;
     createdOn?: Date;
@@ -28,13 +28,12 @@ const markSchema = new mongoose.Schema({
     studentRollNo: { type: String },
     studentClass: { type: String },
     term: { type: String },
-    subject: [
+    subjects: [
         {
             _id: { type: mongoose.Types.ObjectId, required: true, auto: true },
             subjectName: { type: String },
-            subJectMarks: {type: Number },
+            subJectMark: {type: Number },
             subjectGrade: { type: String },
-            message: { type: String },
             createdOn: { type: Date },
         }
     ],

@@ -14,15 +14,18 @@ var activity = 'StudentMarks';
  * @param {Function} next  
  * @description This Function is used to create Student
  */
-  
+
 
 export const saveStudentMarks = async (req, res, next) => {
     const errors = validationResult(req);
     if (errors.isEmpty()) {
         try {
             const StudentMarkDetails: MarkDocument = req.body;
+            console.log('req.bodyyyyyyyyyyyyyyyyy', req.body);
+
             const createStudentMarkDetails = new Mark(StudentMarkDetails);
             const data = await createStudentMarkDetails.save();
+            console.log('datadatadatadatadata', data)
             response(req, res, activity, true, 200, data, clientError.success.savedSuccessfully);
         } catch (err: any) {
             response(req, res, activity, false, 500, {}, errorMessage.internalServer, err.message)
@@ -32,66 +35,67 @@ export const saveStudentMarks = async (req, res, next) => {
     }
 };
 
-// export let getAllStudentMarks = async (req, res, next) => {
-//     try {
-//         const data = await Student.find({ isDeleted: false });
-//         response(req, res, activity, true, 200, data, clientError.success.fetchedSuccessfully);
-//     } catch (err: any) {
-//         response(req, res, activity, false, 500, {}, errorMessage.internalServer, err.message);
-//     }
-// };
+export let getAllStudentMarks = async (req, res, next) => {
+    try {
+        const data = await Mark.find({ isDeleted: false });
+        response(req, res, activity, true, 200, data, clientError.success.fetchedSuccessfully);
+    } catch (err: any) {
+        response(req, res, activity, false, 500, {}, errorMessage.internalServer, err.message);
+    }
+};
 
-// export let updateStudentMarks = async (req, res, next) => {
-//     const errors = validationResult(req);
-//     if (errors.isEmpty()) {
-//         try {
-//             const studentDetails: StudentDocument = req.body;
-//                 const updateStudent = new Student(studentDetails)
-//                 let insertStudent = await updateStudent.updateOne({
-//                     $set: {
-//                         dateOfBirth: studentDetails.dateOfBirth,
-//                         age: studentDetails.age,
-//                         address: studentDetails.address,
-//                         modifiedOn: studentDetails.modifiedOn,
-//                         modifiedBy: studentDetails.modifiedBy
-//                     }
-//                 });
-//                 response(req, res, activity, true, 200, insertStudent, clientError.success.updateSuccess)
-//         } catch (err: any) {
-//             response(req, res, activity, false, 500, {}, errorMessage.internalServer, err.message)
-//         }
-//     } else {
-//         response(req, res, activity, false, 422, {}, errorMessage.fieldValidation, JSON.stringify(errors.mapped()));
-//     }
-// };
-
-
-
-// export let deleteStudentMarks = async (req, res, next) => {
-//     try {
-//         let { modifiedOn, modifiedBy } = req.body;
-//         let id = req.query._id;
-//         const data = await Student.findByIdAndUpdate({ _id: id }, {
-//             $set: {
-//                 isDeleted: true,
-//                 modifiedOn: modifiedOn,
-//                 modifiedBy: modifiedBy,
-//             }
-//         })
-//         response(req, res, activity, true, 200, data, clientError.success.deleteSuccess)
-//     }
-//     catch (err: any) {
-//         response(req, res, activity, true, 500, {}, errorMessage.internalServer, err.message)
-//     }
-// };
+export let updateStudentMarks = async (req, res, next) => {
+    const errors = validationResult(req);
+    if (errors.isEmpty()) {
+        try {
+            const markDetails: MarkDocument = req.body;
+            const updateStudent = new Mark(markDetails)
+            let insertStudent = await updateStudent.updateOne({
+                $set: {
+                    name: markDetails.name,
+                    studentRollNo: markDetails.studentRollNo,
+                    studentClass: markDetails.studentClass,
+                    subjects: markDetails.subjects,
+                    modifiedOn: markDetails.modifiedOn,
+                    modifiedBy: markDetails.modifiedBy
+                }
+            });
+            response(req, res, activity, true, 200, insertStudent, clientError.success.updateSuccess)
+        } catch (err: any) {
+            response(req, res, activity, false, 500, {}, errorMessage.internalServer, err.message)
+        }
+    } else {
+        response(req, res, activity, false, 422, {}, errorMessage.fieldValidation, JSON.stringify(errors.mapped()));
+    }
+};
 
 
 
-// export let getSingleStudentMarks = async (req, res,next) => {
-//     try {
-//         const data = await Student.findById({ _id: req.query._id });
-//         response(req, res, activity, true, 200, data, clientError.success.fetchedSuccessfully);
-//     } catch (err: any) {
-//         response(req, res, activity, false, 500, {}, errorMessage.internalServer, err.message);
-//     }
-// }
+export let deleteStudentMarks = async (req, res, next) => {
+    try {
+        let { modifiedOn, modifiedBy } = req.body;
+        let id = req.query._id;
+        const data = await Mark.findByIdAndUpdate({ _id: id }, {
+            $set: {
+                isDeleted: true,
+                modifiedOn: modifiedOn,
+                modifiedBy: modifiedBy,
+            }
+        })
+        response(req, res, activity, true, 200, data, clientError.success.deleteSuccess)
+    }
+    catch (err: any) {
+        response(req, res, activity, true, 500, {}, errorMessage.internalServer, err.message)
+    }
+};
+
+
+
+export let getSingleStudentMarks = async (req, res, next) => {
+    try {
+        const data = await Mark.findById({ _id: req.query._id });
+        response(req, res, activity, true, 200, data, clientError.success.fetchedSuccessfully);
+    } catch (err: any) {
+        response(req, res, activity, false, 500, {}, errorMessage.internalServer, err.message);
+    }
+}
