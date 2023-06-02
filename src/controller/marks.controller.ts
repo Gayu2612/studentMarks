@@ -21,11 +21,8 @@ export const saveStudentMarks = async (req, res, next) => {
     if (errors.isEmpty()) {
         try {
             const StudentMarkDetails: MarkDocument = req.body;
-            console.log('req.bodyyyyyyyyyyyyyyyyy', req.body);
-
             const createStudentMarkDetails = new Mark(StudentMarkDetails);
             const data = await createStudentMarkDetails.save();
-            console.log('datadatadatadatadata', data)
             response(req, res, activity, true, 200, data, clientError.success.savedSuccessfully);
         } catch (err: any) {
             response(req, res, activity, false, 500, {}, errorMessage.internalServer, err.message)
@@ -55,7 +52,12 @@ export let updateStudentMarks = async (req, res, next) => {
                     name: markDetails.name,
                     studentRollNo: markDetails.studentRollNo,
                     studentClass: markDetails.studentClass,
-                    subjects: markDetails.subjects,
+                    tamil: markDetails.tamil,
+                    english: markDetails.english,
+                    maths: markDetails.maths,
+                    science: markDetails.science,
+                    social: markDetails.social,
+                    total: markDetails.total,
                     modifiedOn: markDetails.modifiedOn,
                     modifiedBy: markDetails.modifiedBy
                 }

@@ -7,12 +7,14 @@ export interface MarkDocument extends mongoose.Document {
     studentRollNo?: string;
     studentClass?: string;
     term?: string;
+    total?: Number;
     tamil?: Number;
     english?: Number;
     maths?: Number;
     science?: Number;
+    social?:Number;
     computer?: Number;
-    subjects?:any[];
+    subjects?: any[];
     status?: Number;
     isDeleted?: boolean;
     createdOn?: Date;
@@ -32,15 +34,22 @@ const markSchema = new mongoose.Schema({
         {
             _id: { type: mongoose.Types.ObjectId, required: true, auto: true },
             subjectName: { type: String },
-            subJectMark: {type: Number },
+            subJectMark: {type: String },
             subjectGrade: { type: String },
-            createdOn: { type: Date },
+            // tamil: { type: Number },
+            // english: { type: Number },
+            // maths: { type: Number },
+            // science: { type: Number },
+            // computer: { type: Number },
+            // createdOn: { type: Date },
         }
     ],
+    total: { type: Number },
     tamil: { type: Number },
     english: { type: Number },
     maths: { type: Number },
     science: { type: Number },
+    social: { type: Number },
     computer: { type: Number },
     status: { type: Number, default: 1 },
     isDeleted: { type: Boolean, default: false },
