@@ -6,6 +6,7 @@ export interface StudentDocument extends mongoose.Document {
     age?: Number;
     address?: String;
     status?: Number;
+    feesAmount?:string;
     isDeleted?: boolean;
     createdOn?: Date;
     createdBy?: string;
@@ -19,6 +20,7 @@ const studentSchema = new mongoose.Schema({
     dateOfBirth: { type: Date },
     age: { type: Number },
     address: { type: String },
+    feesAmount: { type: String },
     status: { type: Number, default: 1 },   
     isDeleted: { type: Boolean, default: false },
     createdOn: { type: Date },
