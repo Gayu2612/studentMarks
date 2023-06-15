@@ -1,11 +1,10 @@
 import { validationResult } from 'express-validator';
 import { User } from '../models/user.model';
 import { hashPassword } from '../helper/Encryption';
-import { clientError, errorMessage } from 'src/helper/ErrorMessage';
+import { clientError, errorMessage } from '../helper/ErrorMessage';
 import { response } from '../helper/commonResponseHandler';
 import * as TokenManager from "../utils/tokenManager";
-
-import { Register } from 'src/models/register.model';
+import { Register } from '../models/register.model';
 var activity = 'LOGIN';
 
 /**

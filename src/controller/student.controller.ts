@@ -78,6 +78,7 @@ export let updateStudent= async (req, res, next) => {
                         modifiedBy: studentDetails.modifiedBy
                     }
                 });
+                
                 response(req, res, activity, true, 200, insertStudent, clientError.success.updateSuccess)
         } catch (err: any) {
             response(req, res, activity, false, 500, {}, errorMessage.internalServer, err.message)
